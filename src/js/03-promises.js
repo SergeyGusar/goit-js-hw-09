@@ -1,6 +1,7 @@
 import Notiflix from 'notiflix';
 
-const form = document.querySelector('form');
+
+const form = document.querySelector('.form');
 
 form.addEventListener('submit', onSubmitForm);
 
@@ -8,16 +9,18 @@ function onSubmitForm(evt) {
   evt.preventDefault();
 
   const {
-  delay: { CSSMathValue: delay },
-  step: {value:step },
-  amount: {value:amount },
-  } = evt.currentTarget;
+    delay: { value: delay },
+    step: { value: step },
+    amount: { value: amount },
+  } = evt.target;
+
   onCount(Number(amount), Number(delay), Number(step));
 }
 
+
 function onCount(amount, delay, step) {
-  for (let i = 0; i < amount; i += 1) {
-    const promiseNum = i + 1;
+  for (let i = 1; i <= amount; i += 1) {
+    const promiseNum = i;
     const delayStep = delay + step * i;
     createPromise(promiseNum, delayStep)
       .then(({ position, delay }) => {
@@ -33,10 +36,10 @@ function onCount(amount, delay, step) {
   }
 }
 
-
 function createPromise(position, delay) {
+  const shouldResolve = Math.random() > 0.3;
   return new Promise((resolve, reject) => {
-    const shouldResolve = Math.random() > 0.3;
+    
     setTimeout(() => {
       if (shouldResolve) {
         resolve({ position, delay });

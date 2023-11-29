@@ -31,6 +31,14 @@ const options = {
 };
 
 flatpickr('#datetime-picker', options);
+
+if (options.defaultDate < new Date()) {
+  refs.btnStart.disabled = true;
+}
+
+refs.btnStart.addEventListener('click', onClick);
+
+
 let interval = null;
 
 function onClick() {
