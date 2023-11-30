@@ -19,7 +19,7 @@ function onSubmitForm(evt) {
 
 
 function onCount(amount, delay, step) {
-  for (let i = 0; i <= amount; i + 1) {
+  for (let i = 0; i <= amount; i += 1) {
     const promiseNum = i;
     const delayStep = delay + step * i;
     createPromise(promiseNum, delayStep)
